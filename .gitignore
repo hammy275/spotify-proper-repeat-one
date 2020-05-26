@@ -1,0 +1,2 @@
+# Ignore Spotipy cache
+.cache-*
