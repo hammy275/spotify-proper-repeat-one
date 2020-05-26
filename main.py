@@ -3,6 +3,7 @@ import spotipy.util as util
 import os
 import json
 from time import sleep
+import copy
 
 scopes = ["user-read-playback-state", "user-modify-playback-state", "user-read-currently-playing"]
 scope = ",".join(scopes)
@@ -18,11 +19,19 @@ client = spotipy.Spotify(auth=token)
 
 print("Starting up...")
 old_state = client.current_playback()
+while old_state is None:
+    sleep(5)
+    old_state = client.current_playback()
 sleep(5)
+print("Startup complete!")
 while True:
     new_state = client.current_playback()
+    while new_state is None:
+        sleep(5)
+        new_state = client.current_playback()
     if old_state["repeat_state"] == "track" and new_state["repeat_state"] == "context" and new_state["progress_ms"] < 6000:
         print("Caught what's most likely Spotify doing its repeat switch! Switching it back...")
         client.repeat("track")
-    old_state = new_state
+        new_state["repeat_state"] = "track"
+    old_state = copy.deepcopy(new_state)
     sleep(5)

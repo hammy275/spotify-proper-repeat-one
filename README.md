@@ -1,6 +1,6 @@
 # spotify-proper-repeat-one
 
-A very small Python program that makes it so when you go to another song with the repeat mode set to "only this song", it will correct Spotify's automatic change to "repeat this playlist/album/whatever" back to "repeat this song.
+A very small Python program that makes it so when you go to another song with the repeat mode set to "only this song", it will correct Spotify's automatic change to "repeat this playlist/album/whatever" back to "repeat this song".
 
 ## Setup (for Linux and macOS systems with Python 3.7 or greater)
 
